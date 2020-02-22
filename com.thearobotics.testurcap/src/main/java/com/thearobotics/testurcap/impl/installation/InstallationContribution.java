@@ -7,8 +7,7 @@ import com.ur.urcap.api.domain.script.ScriptWriter;
 
 public class InstallationContribution implements InstallationNodeContribution
 {
-
-	private DataModel model;
+	private final DataModel model;
 
 	public InstallationContribution(InstallationAPIProvider apiProvider, DataModel model, InstallationView view)
 	{

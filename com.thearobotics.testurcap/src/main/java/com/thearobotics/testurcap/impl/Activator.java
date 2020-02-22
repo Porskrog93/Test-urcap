@@ -21,7 +21,7 @@ public class Activator implements BundleActivator
 		TestDaemonService daemonService = new TestDaemonService();
 		InstallationService installationService = new InstallationService(daemonService);
 
-		bundleContext.registerService(SwingInstallationNodeService.class, new InstallationService(daemonService), null);
+		bundleContext.registerService(SwingInstallationNodeService.class, installationService, null);
 		bundleContext.registerService(SwingProgramNodeService.class, new MainService(), null);
 		bundleContext.registerService(DaemonService.class, daemonService, null);
 	}
