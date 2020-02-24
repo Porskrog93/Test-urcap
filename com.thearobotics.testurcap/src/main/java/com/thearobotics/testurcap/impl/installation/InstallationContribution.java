@@ -1,37 +1,50 @@
 package com.thearobotics.testurcap.impl.installation;
 
+import com.thearobotics.testurcap.impl.TestDaemonService;
 import com.ur.urcap.api.contribution.InstallationNodeContribution;
 import com.ur.urcap.api.contribution.installation.InstallationAPIProvider;
 import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
 
 public class InstallationContribution implements InstallationNodeContribution
-{
-
-	private DataModel model;
-
-	public InstallationContribution(InstallationAPIProvider apiProvider, DataModel model, InstallationView view)
 	{
-		this.model = model;
-	}
 
-	@Override
-	public void openView()
-	{
-	}
+		private final InstallationView view;
 
-	@Override
-	public void closeView()
-	{
-	}
+		protected final InstallationDaemon installationDaemon;
 
-	public boolean isDefined()
-	{
-		return true;
-	}
+		private DataModel model;
 
-	@Override
-	public void generateScript(ScriptWriter writer)
-	{
+		public InstallationContribution(
+				InstallationAPIProvider apiProvider, DataModel model, InstallationView view,
+				TestDaemonService daemonService
+		)
+			{
+				this.model = model;
+				this.view = view;
+				this.installationDaemon = new InstallationDaemon(daemonService, view, model);
+			}
+
+		@Override
+		public void openView()
+			{
+				installationDaemon.startTimer();
+			}
+
+		@Override
+		public void closeView()
+			{
+				installationDaemon.stopTimer();
+			}
+
+		public boolean isDefined()
+			{
+				return installationDaemon.daemonRunning();
+			}
+
+		@Override
+		public void generateScript(ScriptWriter writer)
+			{
+			}
+
 	}
-}

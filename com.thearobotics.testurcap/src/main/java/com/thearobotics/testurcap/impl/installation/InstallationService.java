@@ -15,38 +15,39 @@ import com.ur.urcap.api.domain.SystemAPI;
 import com.ur.urcap.api.domain.data.DataModel;
 
 public class InstallationService implements SwingInstallationNodeService<InstallationContribution, InstallationView>
-{
-
-	private final TestDaemonService daemonService;
-
-	public InstallationService(TestDaemonService daemonService) {
-		this.daemonService=daemonService;
-	}
-
-	@Override
-	public void configureContribution(ContributionConfiguration configuration)
 	{
-	}
 
-	@Override
-	public String getTitle(Locale locale)
-	{
-		return "Test URCap";
-	}
+		private final TestDaemonService daemonService;
 
-	@Override
-	public InstallationView createView(ViewAPIProvider apiProvider)
-	{
-		SystemAPI systemAPI = apiProvider.getSystemAPI();
-		Style style = systemAPI.getSoftwareVersion().getMajorVersion() >= 5 ? new V5Style() : new V3Style();
-		return new InstallationView(style);
-	}
+		public InstallationService(TestDaemonService daemonService)
+			{
+				this.daemonService = daemonService;
+			}
 
-	@Override
-	public InstallationContribution createInstallationNode(
-			InstallationAPIProvider apiProvider, InstallationView view, DataModel model, CreationContext context
-	)
-	{
-		return new InstallationContribution(apiProvider, model, view);
+		@Override
+		public void configureContribution(ContributionConfiguration configuration)
+			{
+			}
+
+		@Override
+		public String getTitle(Locale locale)
+			{
+				return "Test URCap";
+			}
+
+		@Override
+		public InstallationView createView(ViewAPIProvider apiProvider)
+			{
+				SystemAPI systemAPI = apiProvider.getSystemAPI();
+				Style style = systemAPI.getSoftwareVersion().getMajorVersion() >= 5 ? new V5Style() : new V3Style();
+				return new InstallationView(style);
+			}
+
+		@Override
+		public InstallationContribution createInstallationNode(
+				InstallationAPIProvider apiProvider, InstallationView view, DataModel model, CreationContext context
+		)
+			{
+				return new InstallationContribution(apiProvider, model, view, daemonService);
+			}
 	}
-}
