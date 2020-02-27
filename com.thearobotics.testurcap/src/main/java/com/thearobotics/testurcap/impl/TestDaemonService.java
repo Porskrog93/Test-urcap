@@ -12,7 +12,7 @@ public class TestDaemonService implements DaemonService
 
 		private DaemonContribution daemonContribution;
 
-		private final String daemonPath = "/com/thearobotics/impl/daemon/";
+		private final String daemonPath = "/com/thearobotics/testurcap/impl/daemon/";
 
 		// init is called when the daemon service i registered in the activator. If the
 		// daemon should be started automatically, the daemonContribution.start should
@@ -28,6 +28,7 @@ public class TestDaemonService implements DaemonService
 						daemonContribution.installResource(new URL("file:" + daemonPath));
 					} catch (MalformedURLException e)
 					{
+						System.out.println("Malformed URL");
 						e.printStackTrace();
 					}
 			}
@@ -41,6 +42,7 @@ public class TestDaemonService implements DaemonService
 						return new URL("file:" + daemonPath + "daemon.py");
 					} catch (MalformedURLException e)
 					{
+						System.out.println("Malformed URL");
 						e.printStackTrace();
 						return null;
 					}

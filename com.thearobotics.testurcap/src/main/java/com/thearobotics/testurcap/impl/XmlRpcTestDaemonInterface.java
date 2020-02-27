@@ -46,6 +46,8 @@ public class XmlRpcTestDaemonInterface
 						return true;
 					} catch (XmlRpcException e)
 					{
+						System.out.println("XmlRpcException");
+						e.printStackTrace();
 						return false;
 					}
 
