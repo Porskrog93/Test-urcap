@@ -24,6 +24,7 @@ public class XmlRpcTestDaemonInterface
 						config.setServerURL(new URL("http://" + host + ":" + port + "/RPC2"));
 					} catch (MalformedURLException e)
 					{
+						System.out.println("MalformedURLException");
 						e.printStackTrace();
 					}
 				config.setConnectionTimeout(1000);

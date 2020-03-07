@@ -12,7 +12,7 @@ public class TestDaemonService implements DaemonService
 
 		private DaemonContribution daemonContribution;
 
-		private final String daemonPath = "/com/thearobotics/testurcap/impl/daemon/";
+		private final String daemonPath = "/com/thearobotics/impl/daemon/";
 
 		// init is called when the daemon service i registered in the activator. If the
 		// daemon should be started automatically, the daemonContribution.start should
